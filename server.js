@@ -39,16 +39,19 @@ app.post('/jasenhakemus', function(req, res){
         text: 'Uusi jäsenhakemus tullut:\n' + JSON.stringify(req.body)
     };
 
+    let errorstring = "there is error";
+
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log(error);
         } else {
+            errorstring = 'there is no error';
             console.log('Email sent: ' + info.response);
         }
     });
 
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end('Kiitos! Hakemuksesi on vastaanotettu.');
+    res.end('Kiitos! Hakemuksesi on vastaanotettu.' + errorstring);
 });
 
 app.post('/splitlonIlmo', function(req, res){
@@ -71,8 +74,7 @@ app.post('/splitlonIlmo', function(req, res){
     res.end('Kiitos! Ilmoittautumisesi on vastaanotettu.');
 });
 
-const PORT = process.env.PORT || 5000
-app.listen(PORT);
-console.log('listening at ${ PORT }');
-console.log('...');
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Listening on port ${ PORT }`));
+
 
