@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'emiller.arkko@gmail.com',
-        pass: 'rogerfederer1'
+        user: 'evaninemailorja@gmail.com',
+        pass: 'abeAG123'
     }
 });
 
@@ -34,8 +34,8 @@ var transporter = nodemailer.createTransport({
 app.post('/jasenhakemus', function(req, res){
     var mailOptions = {
         from: 'miller',
-        to: 'emiller.arkko@gmail.com',
-        subject: 'Jäsenhakemus',
+        to: 'voittamisenkulttuuriry@outlook.com',
+        subject: 'Jäsenhakemus (testi)',
         text: 'Uusi jäsenhakemus tullut:\n' + JSON.stringify(req.body)
     };
 
@@ -74,7 +74,7 @@ app.post('/splitlonIlmo', function(req, res){
     res.end('Kiitos! Ilmoittautumisesi on vastaanotettu.');
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Listening on port ${ PORT }`));
 
 
