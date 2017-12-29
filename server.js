@@ -35,30 +35,27 @@ app.post('/jasenhakemus', function(req, res){
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
-        subject: 'Jäsenhakemus (testi)',
+        subject: 'Jäsenhakemus',
         text: 'Uusi jäsenhakemus tullut:\n' + JSON.stringify(req.body)
     };
-
-    let errorstring = "there is error";
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log(error);
         } else {
-            errorstring = 'there is no error';
             console.log('Email sent: ' + info.response);
         }
     });
 
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end('Kiitos! Hakemuksesi on vastaanotettu.' + errorstring);
+    res.end('Kiitos! Hakemuksesi on vastaanotettu.');
 });
 
 app.post('/splitlonIlmo', function(req, res){
     var mailOptions = {
         from: 'miller',
-        to: 'emiller.arkko@gmail.com',
-        subject: 'Splitlon ilmo',
+        to: 'voittamisenkulttuuriry@outlook.com',
+        subject: 'Splitlon ilmo (testi)',
         text: 'Uusi Splitlon ilmoittautuminen:\n' + JSON.stringify(req.body)
     };
 
