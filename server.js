@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 
 
-//NODEMAILER TRIVIAL SETUP
+//NODEMAILER TRANSPORTER OBJECT SETUP
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -20,22 +20,12 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-
-
-/*transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-        console.log(error);
-    } else {
-        console.log('Email sent: ' + info.response);
-    }
-});*/
-//NODEMAILER LOGIC END
-
+//NEW MEMBERSHIP - POST REQUEST
 app.post('/jasenhakemus', function(req, res){
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
-        subject: 'Jäsenhakemus',
+        subject: 'Uusi Jäsenhakemus',
         text: 'Uusi jäsenhakemus tullut:\n' + JSON.stringify(req.body)
     };
 
@@ -51,12 +41,14 @@ app.post('/jasenhakemus', function(req, res){
     res.end('Kiitos! Hakemuksesi on vastaanotettu.');
 });
 
+
+//TEMPORARY SIGNUP - POST REQUEST
 app.post('/splitlonIlmo', function(req, res){
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
-        subject: 'Splitlon ilmo (testi)',
-        text: 'Uusi Splitlon ilmoittautuminen:\n' + JSON.stringify(req.body)
+        subject: 'Splitlon ilmo',
+        text: 'Uusi Splitlon ilmoittautuminen tullut:\n' + JSON.stringify(req.body)
     };
 
     transporter.sendMail(mailOptions, function(error, info){
