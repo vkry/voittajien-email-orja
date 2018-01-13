@@ -61,7 +61,7 @@ app.post('/splitlonIlmo', function(req, res){
         subject: 'Splitlon ilmo',
         text: buildSplitlonIlmoString(req.body)
     };
-
+    
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
