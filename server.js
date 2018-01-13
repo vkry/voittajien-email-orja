@@ -20,13 +20,26 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+function buildJasenHakemusString(data){
+    var email = "Uusi jäsenhakemus tullut:\n";
+    email += "\nEtunimi: " + data.firstname;
+    email += "\nSukunimi: " + data.lastname;
+    email += "\nOsoite: " + data.address;
+    email += "\nSyntymäaika: " + data.birthday;
+    email += "\nEmail: " + data.email;
+    email += "\nPuh: " + data.phone;
+    email += "\nVanhemman puh " + data.parentPhone;
+    email += "\nMuuta: " + data.details;
+    return email;
+}
+
 //NEW MEMBERSHIP - POST REQUEST
 app.post('/jasenhakemus', function(req, res){
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
         subject: 'Uusi Jäsenhakemus',
-        text: 'Uusi jäsenhakemus tullut:\n' + JSON.stringify(req.body)
+        text: buildJasenHakemusString(req.body)
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -61,7 +74,7 @@ app.post('/splitlonIlmo', function(req, res){
         subject: 'Splitlon ilmo',
         text: buildSplitlonIlmoString(req.body)
     };
-    
+
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
