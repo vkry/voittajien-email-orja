@@ -28,7 +28,7 @@ function buildJasenHakemusString(data){
     email += "\nSyntymäaika: " + data.birthday;
     email += "\nEmail: " + data.email;
     email += "\nPuh: " + data.phone;
-    email += "\nVanhemman puh " + data.parentPhone;
+    email += "\nVanhemman puh " + data.parentphone;
     email += "\nMuuta: " + data.details;
     return email;
 }
