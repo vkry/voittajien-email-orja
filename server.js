@@ -41,6 +41,17 @@ app.post('/jasenhakemus', function(req, res){
     res.end('Kiitos! Hakemuksesi on vastaanotettu.');
 });
 
+function buildSplitlonIlmoString(data) {
+    var email = "Uusi Splitlon ilmoittautuminen tullut:\n";
+    email += "\nEtunimi: " + data.firstname;
+    email += "\nSukunimi: " + data.lastname;
+    email += "\nOsoite: " + data.address;
+    email += "\nSyntymäaika: " + data.birthday;
+    email += "\nEmail: " + data.email;
+    email += "\nPuh: " + data.phone;
+    email += "\nPelin taso: " + data.levelOfPlay;
+    return email;
+}
 
 //TEMPORARY SIGNUP - POST REQUEST
 app.post('/splitlonIlmo', function(req, res){
@@ -48,8 +59,9 @@ app.post('/splitlonIlmo', function(req, res){
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
         subject: 'Splitlon ilmo',
-        text: 'Uusi Splitlon ilmoittautuminen tullut:\n' + JSON.stringify(req.body)
+        text: buildSplitlonIlmoString(req.body)
     };
+
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
