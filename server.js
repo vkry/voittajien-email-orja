@@ -56,8 +56,8 @@ app.post('/jasenhakemus', function (req, res) {
 function buildYhteydenottoString(data) {
     var email = "";
     email += "Suora yhteydenotto kotisivuilta."
-    email += "\nL&auml;hett&auml;j&auml;: " + data.name;
-    email += "\nL&auml;hett&auml;j&auml;n email: " + data.email;
+    email += "\nLähettäjä: " + data.name;
+    email += "\nLähettäjän email: " + data.email;
     email += "\nAsia:\n" + data.details;
     return email;
 }
