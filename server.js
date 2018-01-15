@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-
 //NODEMAILER TRANSPORTER OBJECT SETUP
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -20,7 +19,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-function buildJasenHakemusString(data){
+function buildJasenHakemusString(data) {
     var email = "Uusi jäsenhakemus tullut:\n";
     email += "\nEtunimi: " + data.firstname;
     email += "\nSukunimi: " + data.lastname;
@@ -34,7 +33,7 @@ function buildJasenHakemusString(data){
 }
 
 //NEW MEMBERSHIP - POST REQUEST
-app.post('/jasenhakemus', function(req, res){
+app.post('/jasenhakemus', function (req, res) {
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
@@ -42,7 +41,7 @@ app.post('/jasenhakemus', function(req, res){
         text: buildJasenHakemusString(req.body)
     };
 
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
         } else {
@@ -52,6 +51,42 @@ app.post('/jasenhakemus', function(req, res){
 
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.end('Kiitos! Hakemuksesi on vastaanotettu.');
+});
+
+function buildYhteydenottoString(data) {
+    var email = "";
+    email += "Suora yhteydenotto kotisivuilta."
+    email += "\nLähettäjä: " + data.name;
+    email += "\nLähettäjän email: " + data.email;
+    email += "\nAsia:\n" + data.details;
+    return email;
+}
+
+app.post('/yhteydenotto', function (req, res) {
+    var mailOptions = {
+        from: 'miller',
+        to: 'voittamisenkulttuuriry@outlook.com',
+        subject: 'Yhteydenotto',
+        text: buildYhteydenottoString(req.body)
+    };
+
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end('Kiitos viestistäsi, olemme vastaanottaneet sen.' +
+        '<br>Käsittelemme viestit kerran viikossa, jos asia on kiireellinen niin laitathan tekstiviestin tai soitat.' +
+        '<br>' +
+        '<br>' +
+        'Hallituksen puheenjohtaja: Ilkka Lehtinen 0400 355 201<br>' +
+        'Sihteeri: Hannu Aro 050 3289319<br>' +
+        'Rahastonhoitaja: Mari Lehtonen 050 5678 719');
 });
 
 function buildSplitlonIlmoString(data) {
@@ -67,7 +102,7 @@ function buildSplitlonIlmoString(data) {
 }
 
 //TEMPORARY SIGNUP - POST REQUEST
-app.post('/splitlonIlmo', function(req, res){
+app.post('/splitlonIlmo', function (req, res) {
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
@@ -76,7 +111,7 @@ app.post('/splitlonIlmo', function(req, res){
     };
 
 
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
         } else {
