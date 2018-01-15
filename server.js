@@ -20,11 +20,11 @@ var transporter = nodemailer.createTransport({
 });
 
 function buildJasenHakemusString(data) {
-    var email = "Uusi jäsenhakemus tullut:\n";
+    var email = "Uusi j&auml;senhakemus tullut:\n";
     email += "\nEtunimi: " + data.firstname;
     email += "\nSukunimi: " + data.lastname;
     email += "\nOsoite: " + data.address;
-    email += "\nSyntymäaika: " + data.birthday;
+    email += "\nSyntym&auml;aika: " + data.birthday;
     email += "\nEmail: " + data.email;
     email += "\nPuh: " + data.phone;
     email += "\nVanhemman puh: " + data.parentphone;
@@ -37,7 +37,7 @@ app.post('/jasenhakemus', function (req, res) {
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
-        subject: 'Uusi Jäsenhakemus',
+        subject: 'Uusi J&auml;senhakemus',
         text: buildJasenHakemusString(req.body)
     };
 
@@ -56,8 +56,8 @@ app.post('/jasenhakemus', function (req, res) {
 function buildYhteydenottoString(data) {
     var email = "";
     email += "Suora yhteydenotto kotisivuilta."
-    email += "\nLähettäjä: " + data.name;
-    email += "\nLähettäjän email: " + data.email;
+    email += "\nL&auml;hett&auml;j&auml;: " + data.name;
+    email += "\nL&auml;hett&auml;j&auml;n email: " + data.email;
     email += "\nAsia:\n" + data.details;
     return email;
 }
@@ -79,9 +79,9 @@ app.post('/yhteydenotto', function (req, res) {
         }
     });
 
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end('Kiitos viestistäsi, olemme vastaanottaneet sen.' +
-        '<br>Käsittelemme viestit kerran viikossa, jos asia on kiireellinen niin laitathan tekstiviestin tai soitat.' +
+    res.writeHead(200, {'Content-Type': 'text/html', });
+    res.end('Kiitos viestist&auml;si, olemme vastaanottaneet sen.' +
+        '<br>K&auml;sittelemme viestit kerran viikossa, jos asia on kiireellinen niin laitathan tekstiviestin tai soitat.' +
         '<br>' +
         '<br>' +
         'Hallituksen puheenjohtaja: Ilkka Lehtinen 0400 355 201<br>' +
@@ -94,7 +94,7 @@ function buildSplitlonIlmoString(data) {
     email += "\nEtunimi: " + data.firstname;
     email += "\nSukunimi: " + data.lastname;
     email += "\nOsoite: " + data.address;
-    email += "\nSyntymäaika: " + data.birthday;
+    email += "\nSyntym&auml;aika: " + data.birthday;
     email += "\nEmail: " + data.email;
     email += "\nPuh: " + data.phone;
     email += "\nPelin taso: " + data.levelOfPlay;
