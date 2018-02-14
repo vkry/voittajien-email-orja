@@ -89,7 +89,7 @@ app.post('/yhteydenotto', function (req, res) {
         'Rahastonhoitaja: Mari Lehtonen 050 5678 719');
 });
 
-function buildSplitlonIlmoString(data) {
+function buildLoscabaIlmoString(data) {
     var email = "Uusi Splitlon ilmoittautuminen tullut:\n";
     email += "\nEtunimi: " + data.firstname;
     email += "\nSukunimi: " + data.lastname;
@@ -97,17 +97,18 @@ function buildSplitlonIlmoString(data) {
     email += "\nSyntym&auml;aika: " + data.birthday;
     email += "\nEmail: " + data.email;
     email += "\nPuh: " + data.phone;
-    email += "\nPelin taso: " + data.levelOfPlay;
+    email += "\nLuokka: " + data.category;
+    email += "\nMuuta: " + data.other;
     return email;
 }
 
 //TEMPORARY SIGNUP - POST REQUEST
-app.post('/splitlonIlmo', function (req, res) {
+app.post('/loscabaIlmo', function (req, res) {
     var mailOptions = {
         from: 'miller',
         to: 'voittamisenkulttuuriry@outlook.com',
-        subject: 'Splitlon ilmo',
-        text: buildSplitlonIlmoString(req.body)
+        subject: 'Spring loscaba ilmo',
+        text: buildLoscabaIlmoString(req.body)
     };
 
 
